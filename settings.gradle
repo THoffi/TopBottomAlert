@@ -1,0 +1,3 @@
+include ':TopBottomAlerter'
+include ':app'
+rootProject.name = "TopBottomAlert"
