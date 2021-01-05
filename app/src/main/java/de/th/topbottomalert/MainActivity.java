@@ -3,25 +3,29 @@ package de.th.topbottomalert;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
+
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.widget.LinearLayout;
 
 import de.th.topbottomalerter.Alerter;
+import de.th.topbottomalerter.AlerterDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    //LinearLayout topBar;
     Button buttonSuccess,buttonInfo,buttonWarning,buttonError,buttonCustomLayout,buttonCustom;
     Button buttonNoneBottom,buttonFocusableBottom,buttonWarningBottom,buttonErrorBottom,buttonCustomBottom,buttonDefaultBottom;
     Button buttonErrorAutoTop,buttonErrorAutoBottom;
+    Button buttonAlerterDialogBottom,buttonAlerterDialogCenter,buttonAlerterDialogTop;
     View rootview;
-    Activity activity;
+    Context context;
+    AlerterDialog alerterDialog;
     TextView txtYes, txtNo, txtMessage;
 
     @Override
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rootview = findViewById(android.R.id.content);
-        activity = this;
+        context = this;
 
         buttonSuccess = findViewById(R.id.buttonSuccess);
         buttonInfo = findViewById(R.id.buttonInfo);
@@ -46,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         buttonCustomBottom = findViewById(R.id.buttonCustomBottom);
         buttonErrorAutoTop = findViewById(R.id.buttonErrorAutoTop);
         buttonErrorAutoBottom = findViewById(R.id.buttonErrorAutoBottom);
+        buttonAlerterDialogBottom = findViewById(R.id.buttonAlerterDialogBottom);
+        buttonAlerterDialogCenter = findViewById(R.id.buttonAlerterDialogCenter);
+        buttonAlerterDialogTop = findViewById(R.id.buttonAlerterDialogTop);
 
         initlistener();
     }
@@ -54,44 +61,45 @@ public class MainActivity extends AppCompatActivity {
         buttonSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_SUCCESS, true, Color.parseColor("#03bc53"),"Success","This is a successful message<br><b>BIG</b>", Alerter.TOP).show();
+                Alerter.make(context,false, Alerter.ICON_SUCCESS, true, ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess),"Success","This is a successful message<br><b>BIG</b>", Alerter.TOP).show();
             }
         });
 
         buttonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_INFO, false, Color.parseColor("#41c4f4"),"Info","This is an info message", Alerter.TOP).show();
+                Alerter.make(context,false, Alerter.ICON_INFO, false, ContextCompat.getColor(getApplicationContext(),R.color.colorInfo),"Info","This is an info message", Alerter.TOP).show();
             }
         });
 
         buttonWarning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_WARNING, true, Color.parseColor("#f4a941"),"Warning","This is a warning message", Alerter.TOP).show();
+                Alerter.make(context,false, Alerter.ICON_WARNING, true, ContextCompat.getColor(getApplicationContext(),R.color.colorWarning),"Warning","This is a warning message", Alerter.TOP).show();
             }
         });
 
         buttonError.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_ERROR, true, Color.parseColor("#e21e00"),"ERROR","This is an error message", Alerter.TOP).show();
+                Alerter.make(context,false, Alerter.ICON_ERROR, true, ContextCompat.getColor(getApplicationContext(),R.color.colorError),"ERROR","This is an error message", Alerter.TOP).show();
             }
         });
 
         buttonCustom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_CUSTOM,true, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark),"Custom","This is an custom <b>ICON</b> message<br>BOTTOM", Alerter.TOP);
+                Alerter.make(context,false, Alerter.ICON_CUSTOM,true, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark),"Custom","This is an custom <b>ICON</b> message<br>BOTTOM", Alerter.TOP);
                 Alerter.getInstance().setAlerterIcon(de.th.topbottomalerter.R.string.fas_gas_pump);
                 Alerter.getInstance().show();
             }
         });
 
         buttonCustomLayout.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity, Alerter.TOP, R.layout.custom_alert_layout);
+                Alerter.make(context, Alerter.TOP, R.layout.custom_alert_layout);
                 txtYes = Alerter.getInstance().getAlerterView().findViewById(R.id.txt_yes);
                 txtNo = Alerter.getInstance().getAlerterView().findViewById(R.id.txt_no);
                 txtMessage = Alerter.getInstance().getAlerterView().findViewById(R.id.txt_message);
@@ -118,42 +126,42 @@ public class MainActivity extends AppCompatActivity {
         buttonNoneBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_NONE,false, Color.parseColor("#03bc53"),"Success","This is a successful message", Alerter.BOTTOM).show();
+                Alerter.make(context,false, Alerter.ICON_NONE,false, ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess),"Success","This is a successful message", Alerter.BOTTOM).show();
             }
         });
 
         buttonFocusableBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,true, Alerter.ICON_INFO,true, Color.parseColor("#41c4f4"),"Info","This is an info message<br><b>focusable</b>", Alerter.BOTTOM).show();
+                Alerter.make(context,true, Alerter.ICON_INFO,true, ContextCompat.getColor(getApplicationContext(),R.color.colorInfo),"Info","This is an info message<br><b>focusable</b>", Alerter.BOTTOM).show();
             }
         });
 
         buttonWarningBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_WARNING,false, Color.parseColor("#f4a941"),"Warning","This is a warning message", Alerter.BOTTOM).show();
+                Alerter.make(context,false, Alerter.ICON_WARNING,false, ContextCompat.getColor(getApplicationContext(),R.color.colorWarning),"Warning","This is a warning message", Alerter.BOTTOM).show();
             }
         });
 
         buttonErrorBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_ERROR,true, Color.parseColor("#e21e00"),"Error","This is an error message", Alerter.BOTTOM).show();
+                Alerter.make(context,false, Alerter.ICON_ERROR,true, ContextCompat.getColor(getApplicationContext(),R.color.colorError),"Error","This is an error message", Alerter.BOTTOM).show();
             }
         });
 
         buttonDefaultBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_DEFAULT,true, Color.parseColor("#673AB7"),"Default","This is an default message", Alerter.BOTTOM).show();
+                Alerter.make(context,false, Alerter.ICON_DEFAULT,true, Color.parseColor("#673AB7"),"Default","This is an default message", Alerter.BOTTOM).show();
             }
         });
 
         buttonCustomBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_CUSTOM,true, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark),"Custom","This is an custom <b>ICON</b> message<br>BOTTOM", Alerter.BOTTOM);
+                Alerter.make(context,false, Alerter.ICON_CUSTOM,true, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark),"Custom","This is an custom <b>ICON</b> message<br>BOTTOM", Alerter.BOTTOM);
                 Alerter.getInstance().setAlerterIcon(de.th.topbottomalerter.R.string.fas_gas_pump);
                 Alerter.getInstance().show();
             }
@@ -162,30 +170,197 @@ public class MainActivity extends AppCompatActivity {
         buttonErrorAutoBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_ERROR,true, Color.parseColor("#e21e00"),"ERROR","This is an error message", Alerter.BOTTOM,4000).show();
+                Alerter.make(context,false, Alerter.ICON_ERROR,true, ContextCompat.getColor(getApplicationContext(),R.color.colorError),"ERROR","This is an error message", Alerter.BOTTOM,4000).show();
             }
         });
 
         buttonErrorAutoTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Alerter.make(rootview, activity,false, Alerter.ICON_ERROR,true, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark),"ERROR","This is an error message", Alerter.TOP,4000).show();
+                Alerter.make(context,false, Alerter.ICON_ERROR,true, ContextCompat.getColor(getApplicationContext(),R.color.colorError),"ERROR","This is an error message", Alerter.TOP,4000).show();
             }
         });
 
+        buttonAlerterDialogBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callAlerterDialogBottom();
+            }
+        });
+
+        buttonAlerterDialogCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callAlerterDialogCenter();
+            }
+        });
+
+        buttonAlerterDialogTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callAlerterDialogTop();
+            }
+        });
     }
 
-    private void callBannerBottom(){
-        /*
-        Alerter.make(rootview,activity, Alerter.BOTTOM, R.layout.banner);
-        textView = Alerter.getInstance().getBannerView().findViewById(R.id.status_text);
-        relativeLayout = Alerter.getInstance().getBannerView().findViewById(R.id.rlCancel);
-        textView.setText("This is text for the banner");
-        bannerClickListener();
-        Alerter.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationBottom);
-        Alerter.getInstance().show();
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void callAlerterDialogBottom(){
 
-         */
+		// Nur für customView!
+        //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //@SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.standard_alertdialog_layout, null, false);
+
+        alerterDialog = new AlerterDialog(context)
+				.setDialogPosition(AlerterDialog.Position.BOTTOM)
+                //.setDialogCustomView(customView)
+				.setDialogCancelable(false)
+				.setDialogRadius(40)
+				.setDialogClickDismiss(false)
+				.setDialogCloseDuration(0)
+                //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
+				//.setDialogBackgroundColor(getResources().getColor(R.color.alert_green))
+				//setDialogTextColor(getResources().getColor(R.color.alert_red)) // nur wenn kein customView
+				.setDialogTitel("Buttom Dialog") // nur wenn kein customView
+				.setDialogMessage("Message<br><b>Buttom Dialog</b>") // nur wenn kein customView
+                
+                //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
+                //.setHeaderFontAwesomeIcon(de.th.topbottomalerter.R.string.fa_question_circle)
+                .setHeaderFontAwesomeIconColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess))
+				.setHeaderIconEnable(true)
+				.setHeaderIconAnimate(true)
+
+				.setButtonRadius(80)
+                //.setButtonRippleColor(getResources().getColor(R.color.alert_green))
+                .setButtonTextSize(15)
+				.setButtonStrokeSize(3)
+				.setPositiveButtonText("JA")
+				.setPositiveButtonColor(getResources().getColor(R.color.alert_white))
+				//.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
+				.setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_green))
+				.setNegativeButtonText("NEIN")
+				.setNegativeButtonColor(getResources().getColor(R.color.alert_white))
+                //.setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
+				.setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))
+                .addPositiveButtonListener(new AlerterDialog.PositiveButtonListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
+                        alerterDialog.startAnimHeaderIcon(true);
+                    }
+                })
+                .addNegativeButtonListener(new AlerterDialog.NegativeButtonListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
+                        alerterDialog.startAnimHeaderIcon(false);
+                        alerterDialog.dismissAlert();
+                    }
+                })
+        ;
+
+        alerterDialog.show(getSupportFragmentManager(), "");
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void callAlerterDialogCenter(){
+
+		// Nur für customView!
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.custom_alertdialog_layout, null, false);
+
+        alerterDialog = new AlerterDialog(context)
+				.setDialogPosition(AlerterDialog.Position.CENTER)
+                .setDialogCustomView(customView)
+				.setDialogCancelable(false)
+				.setDialogRadius(40)
+				.setDialogClickDismiss(false)
+				.setDialogCloseDuration(4000)
+                //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
+				//.setDialogBackgroundColor(getResources().getColor(R.color.colorPrimaryDark))
+				.setDialogTextColor(getResources().getColor(R.color.alert_white)) // nur wenn kein customView
+				.setDialogTitel("Custom Center") // nur wenn kein customView
+				.setDialogMessage("Message<br><b>Auto Close in 4 sec</b> Test") // nur wenn kein customView
+                
+                .setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
+				.setHeaderIconEnable(true)
+				.setHeaderIconAnimate(false)
+
+                .setButtonRadius(80)
+                .setButtonTextSize(15)
+				.setButtonStrokeSize(3)
+				.setPositiveButtonText("IMMER WIEDER")
+				.setPositiveButtonColor(getResources().getColor(R.color.alert_white))
+				//.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
+				.setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_red))
+				.setNegativeButtonText("Niemals")
+				.setNegativeButtonColor(getResources().getColor(R.color.alert_white))
+                .setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
+				.setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))
+                /*
+                .addPositiveButtonListener(new AlerterDialog.PositiveButtonListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
+                        alerterDialog.startAnimHeaderIcon(true);
+                    }
+                })
+                .addNegativeButtonListener(new AlerterDialog.NegativeButtonListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
+                        alerterDialog.startAnimHeaderIcon(false);
+                        alerterDialog.dismissAlert();
+                    }
+                })
+                */
+        ;
+        alerterDialog.show(getSupportFragmentManager(), "");
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void callAlerterDialogTop(){
+
+        // Nur für customView!
+        //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //@SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.standard_alertdialog_layout, null, false);
+
+        alerterDialog = new AlerterDialog(context)
+                .setDialogPosition(AlerterDialog.Position.TOP)
+                //.setDialogCustomView(customView)
+                .setDialogCancelable(true)
+                .setDialogRadius(40)
+                .setDialogClickDismiss(true)
+                .setDialogCloseDuration(0)
+                //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
+                .setDialogBackgroundColor(getResources().getColor(R.color.alert_green))
+                .setDialogTextColor(getResources().getColor(R.color.alert_red)) // nur wenn kein customView
+                .setDialogTitel("Titel 2") // nur wenn kein customView
+                .setDialogMessage("Message2<br><b>Testmessage</b> Test") // nur wenn kein customView
+
+                //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
+                .setHeaderIconEnable(true)
+                .setHeaderIconAnimate(false)
+
+                .setButtonRadius(80)
+                .setButtonTextSize(15)
+                .setButtonStrokeSize(3)
+                .setPositiveButtonText("IMMER WIEDER")
+                .setPositiveButtonColor(getResources().getColor(R.color.alert_white))
+                //.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
+                .setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_green))
+                .setNegativeButtonText("Niemals")
+                .setNegativeButtonColor(getResources().getColor(R.color.alert_white))
+                //.setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
+                .setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))
+                .addPositiveButtonListener(new AlerterDialog.PositiveButtonListener() {
+                    @Override
+                    public void onClick() {
+                        Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
+                        alerterDialog.startAnimHeaderIcon(true);
+                    }
+                })
+        ;
+        alerterDialog.show(getSupportFragmentManager(), "");
     }
 
 }

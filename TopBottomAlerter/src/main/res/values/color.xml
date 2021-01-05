@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorError">#e21e00</color>
-    <color name="colorInfo">#41c4f4</color>
-    <color name="colorWarning">#f4a941</color>
-    <color name="colorSuccess">#03bc53</color>
+    <color name="colorError">#EC505B</color>
+    <color name="colorInfo">#0C7EA8</color>
+    <color name="colorWarning">#FB9705</color>
+    <color name="colorSuccess">#0f5257</color>
     <color name="colorDefault">#8A62D3</color>
+
+    <color name="colorSemiTransparent">#54101010</color>
+
+    <color name="alert_white">#ffffff</color>
+    <color name="alert_red">#EC505B</color>
+    <color name="alert_green">#0f5257</color>
+    <color name="alert_ripple_grey">#D1D6D6</color>
+    <color name="alert_text">#4D4E4E</color>
 </resources>

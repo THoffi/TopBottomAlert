@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_margin="0dp"
             android:layout_gravity="center_horizontal">
 
             <TextView
@@ -27,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Top"
-                android:layout_margin="10dp"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.134"
@@ -39,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_gravity="center">
 
                 <Button
@@ -87,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_gravity="center">
 
                 <Button
@@ -140,7 +143,7 @@
                 android:id="@+id/textViewBottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="2dp"
                 android:text="Bottom"
                 android:textColor="@color/colorPrimaryDark"
                 tools:ignore="HardcodedText" />
@@ -149,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_gravity="center">
 
                 <Button
@@ -193,6 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_gravity="center">
 
                 <Button
@@ -246,7 +251,7 @@
                 android:id="@+id/textViewAuto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="2dp"
                 android:text="Auto Dismiss"
                 android:textColor="@color/colorPrimaryDark"
                 tools:ignore="HardcodedText" />
@@ -255,6 +260,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_gravity="center">
 
                 <Button
@@ -282,8 +288,69 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_marginBottom="316dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/colorError"
                     android:text="Error-Top"
+                    android:textColor="#ffffff"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewAlerterDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Alerter Dialog"
+                android:textColor="@color/colorPrimaryDark"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/buttonAlerterDialogBottom"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorError"
+                    android:text="Bottom"
+                    android:textColor="#ffffff"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+
+                <Button
+                    android:id="@+id/buttonAlerterDialogCenter"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Center-Custom\nAutoClose"
+                    android:textColor="#ffffff"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+
+                <Button
+                    android:id="@+id/buttonAlerterDialogTop"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingEnd="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Top"
                     android:textColor="#ffffff"
                     tools:ignore="ButtonStyle,HardcodedText" />
 

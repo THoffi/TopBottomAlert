@@ -3,6 +3,7 @@ package de.th.topbottomalerter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.text.Html;
@@ -88,19 +89,24 @@ public class Alerter {
 		// todo
     }
 
-    public Alerter(View view, final Activity activity) {
-        this.activity = activity;
-        this.rootView = view;
+    public Alerter(final Context context) {
+        this.activity = (Activity) context;
+        //this.rootView = view;
+		this.rootView = activity.findViewById(android.R.id.content); // NEU ???
+		/* wenn das geht, kann "rootview" in MainActivity
+		** und "View view" hier weg!!
+		*/
     }
 
 	/**
      * This constructor is used for standard
      */
-    public static Alerter make(View view, Activity activity, boolean focusable, int alerterIcon, boolean alerterPulse, int backgroundColor, String title, String message, int position) {
+    public static Alerter make(Context context, boolean focusable, int alerterIcon, boolean alerterPulse, int backgroundColor, String title, String message, int position) {
 
         checkInstance();
-		instance.rootView = view;
-		instance.activity = activity;
+		instance.activity = (Activity) context;
+		//instance.rootView = view;
+		instance.rootView = instance.activity.findViewById(android.R.id.content); // NEU ???
 		instance.setLayout(R.layout.standard_alert_layout);
         instance.setIcon(alerterIcon);
         instance.setPulse(alerterPulse);
@@ -117,11 +123,12 @@ public class Alerter {
     /**
      * This constructor is used for autodismiss
      */
-    public static Alerter make(View view, Activity activity, boolean focusable, int alerterIcon, boolean alerterPulse, int backgroundColor, String title, String message, int position, int duration) {
+    public static Alerter make(Context context, boolean focusable, int alerterIcon, boolean alerterPulse, int backgroundColor, String title, String message, int position, int duration) {
 
         checkInstance();
-        instance.rootView = view;
-        instance.activity = activity;
+		instance.activity = (Activity) context;
+        //instance.rootView = view;
+		instance.rootView = instance.activity.findViewById(android.R.id.content); // NEU ???
         instance.setLayout(R.layout.standard_alert_layout);
         instance.setIcon(alerterIcon);
         instance.setPulse(alerterPulse);
@@ -138,11 +145,12 @@ public class Alerter {
     /**
      * this constructor is used for customlayout
      */
-    public static Alerter make(View view, Activity activity, int position, int Customlayout) {
+    public static Alerter make(Context context, int position, int Customlayout) {
 
         checkInstance();
-        instance.rootView = view;
-        instance.activity = activity;
+		instance.activity = (Activity) context;
+        //instance.rootView = view;
+		instance.rootView = instance.activity.findViewById(android.R.id.content); // NEU ???
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.setGravity(position);

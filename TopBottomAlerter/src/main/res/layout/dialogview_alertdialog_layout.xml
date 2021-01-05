@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/roott"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Root View -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/root"
+        android:layout_marginTop="35dp"
+        android:background="@android:color/white">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frameLayout3"
+            android:layout_marginTop="40dp">
+
+			<!-- Dialog Content -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frameLayoutContent"/>
+
+        </FrameLayout>
+
+		<!-- Dialog Button Placeholder -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:visibility="gone"
+            android:id="@+id/button_root_placeholder"
+            android:layout_below="@+id/frameLayout3">
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+		<!-- Dialog Button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:id="@+id/button_root"
+            android:layout_below="@+id/frameLayout3">
+
+            <TextView
+                android:id="@+id/alert_negative_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:padding="1dp"
+                android:text="NEIN"
+                android:textStyle="bold"
+                android:textColor="#AEA7A7"
+                android:textAllCaps="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/guideline2"
+                tools:ignore="HardcodedText" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/alert_green"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/alert_positive_button"
+				android:clickable="true"
+				android:focusable="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:padding="1dp"
+                android:text="JA"
+                android:textStyle="bold"
+                android:textColor="#AEA7A7"
+                android:textAllCaps="false"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/guideline2"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+	<!-- Dialog Icon -->
+    <FrameLayout
+        android:id="@+id/frameIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/alert_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="2dp"
+            android:layout_gravity="center|top"
+            android:src="@drawable/ic_cycle" />
+
+    </FrameLayout>
+
+</FrameLayout>
