@@ -12,5 +12,5 @@
     <color name="alert_red">#EC505B</color>
     <color name="alert_green">#0f5257</color>
     <color name="alert_ripple_grey">#D1D6D6</color>
-    <color name="alert_text">#4D4E4E</color>
+    <color name="alert_text">#6C6C6C</color>
 </resources>

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="NotificationAnimationTop" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/alerter_slide_in_from_top</item>
@@ -8,6 +8,11 @@
     <style name="NotificationAnimationBottom" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/alerter_slide_in_from_bottom</item>
         <item name="android:windowExitAnimation">@anim/alerter_slide_out_to_bottom</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/alerter_pulse</item>
+        <item name="android:windowExitAnimation">@anim/alerter_rotate</item>
     </style>
 
 </resources>

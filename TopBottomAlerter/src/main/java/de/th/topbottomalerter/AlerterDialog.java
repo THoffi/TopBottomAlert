@@ -51,42 +51,10 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 	- Farben überarbeiten
 	- actionSetHeaderIcon() (FontAwesomeIcon) : 336
 	
-	Animate Dialog
-	https://stackoverflow.com/questions/13402782/show-dialogfragment-with-animation-growing-from-a-point
-	<style name="DialogAnimation">
-		<item name="android:windowEnterAnimation">@anim/slide_up</item>
-		<item name="android:windowExitAnimation">@anim/slide_down</item>
-	</style>
-	getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-	
-	//for vertical divider:
-	<View
-	android:layout_width="1dp"
-	android:layout_height="fill_parent"
-	android:background="#00000000" />
-
-	//for horizontal line: 
-	<View
-	android:layout_width="fill_parent"
-	android:layout_height="1dp"
-	android:background="#00000000" />
-	
-	oder Constraint Layout Barrier or Guideline
-	<android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline_vertical_in_center"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-	
 */
 
 @SuppressLint("ValidFragment")
 public class AlerterDialog extends DialogFragment implements View.OnClickListener {
-	
-	// https://developer.android.com/reference/androidx/fragment/app/DialogFragment
-	// Example:
-	// https://guides.codepath.com/android/using-dialogfragment
 	
     private Context context;
     private Activity activity;
@@ -106,6 +74,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     private boolean iconEnable = true;
     private boolean cancelable = true;
     private boolean animHeaderIconEnable = false;
+    private boolean animDialog = false;
     private boolean isCustomView = false;
     private boolean isPositiveListener = false;
     private boolean isNegativeListener = false;
@@ -133,7 +102,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     private int strokeNegativeButtonColor = 0;
 	private int closeDuration = 0;					// Wartezeit bis Dialog automatisch geschlossen wird [ms], 0 = wird niemals autom. geschlossen
 	static int dismissDelay = 150;					// Wartezeit wenn Dialog geschlossen wird [ms]
-    private float buttonTextSize = 15;				// TextSize für Positive und Negative Button
+    private float buttonTextSize = 16;				// TextSize für Positive und Negative Button
 	
 	private android.os.Handler handlerAutoClose = null;
 	private Runnable runnableAutoCloser = null;
@@ -183,6 +152,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
         if(getDialog() == null || getDialog().getWindow() == null) return;
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        if(animDialog) getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         // Set Dialog Canceable
         setCancelable(cancelable);
         // Set Dialog Position
@@ -458,7 +428,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 			nGD.setShape(GradientDrawable.RECTANGLE);
 			nGD.setColor(getResources().getColor(R.color.alert_red)); // default
 			if (negativeButtonColor != 0) nGD.setColor(negativeButtonColor); // custom
-			nGD.setStroke(strokeButtonsSize, getResources().getColor(R.color.alert_white)); // default
+			nGD.setStroke(strokeButtonsSize, textColor); // default
 			if (strokeNegativeButtonColor != 0) nGD.setStroke(strokeButtonsSize, strokeNegativeButtonColor); // custom
 			nGD.setCornerRadius(buttonRadius);
 			// Set Ripple ab Android 5.0
@@ -481,7 +451,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 			pGD.setShape(GradientDrawable.RECTANGLE);
 			pGD.setColor(getResources().getColor(R.color.alert_green)); // default
 			if (positiveButtonColor != 0) pGD.setColor(positiveButtonColor); // custom
-			pGD.setStroke(strokeButtonsSize, getResources().getColor(R.color.alert_white)); // default
+			pGD.setStroke(strokeButtonsSize, textColor); // default
 			if (strokePositiveButtonColor != 0) pGD.setStroke(strokeButtonsSize, strokePositiveButtonColor); // custom
 			pGD.setCornerRadius(buttonRadius);
 			// Set Ripple ab Android 5.0
@@ -534,6 +504,10 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     }
 	public AlerterDialog setDialogCancelable(boolean cancelable) {
         this.cancelable = cancelable;
+        return this;
+    }
+    public AlerterDialog setDialogAnimation(boolean animDialog) {
+        this.animDialog = animDialog;
         return this;
     }
 	public AlerterDialog setDialogRadius(int alertRadius) {
