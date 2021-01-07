@@ -30,6 +30,8 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -251,7 +253,16 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 		actionSetButton();
 
         if (!iconEnable) {
-            iconView.setVisibility(View.INVISIBLE);
+            iconView.setVisibility(View.GONE);
+
+            /*
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rootView.getLayoutParams();
+            params.setMargins(0,0,0,0);
+            rootView.setLayoutParams(params);
+            rootView.requestLayout();
+            */
+
+            rootView.setPadding(0,-70,0,0);
         }
 
         if (animHeaderIconEnable) {

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -206,10 +207,6 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("UseCompatLoadingForDrawables")
     private void callAlerterDialogBottom(){
 
-		// Nur für customView!
-        //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //@SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.standard_alertdialog_layout, null, false);
-
         alerterDialog = new AlerterDialog(context)
 				.setDialogPosition(AlerterDialog.Position.BOTTOM)
                 //.setDialogCustomView(customView)
@@ -246,14 +243,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick() {
                         Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
-                        alerterDialog.startAnimHeaderIcon(true);
+                        //alerterDialog.startAnimHeaderIcon(true);
                     }
                 })
                 .addNegativeButtonListener(new AlerterDialog.NegativeButtonListener() {
                     @Override
                     public void onClick() {
                         Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
-                        alerterDialog.startAnimHeaderIcon(false);
+                        //alerterDialog.startAnimHeaderIcon(false);
                         alerterDialog.dismissAlert();
                     }
                 })
@@ -268,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
 		// Nur für customView!
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         @SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.custom_alertdialog_layout, null, false);
+        final EditText txtEdit = customView.findViewById(R.id.edit1);
 
         alerterDialog = new AlerterDialog(context)
 				.setDialogPosition(AlerterDialog.Position.CENTER)
@@ -276,45 +274,45 @@ public class MainActivity extends AppCompatActivity {
                 .setDialogAnimation(false)
 				.setDialogRadius(40)
 				.setDialogClickDismiss(false)
-				.setDialogCloseDuration(4000)
+				.setDialogCloseDuration(0)
                 //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
 				//.setDialogBackgroundColor(getResources().getColor(R.color.colorPrimaryDark))
-				.setDialogTextColor(getResources().getColor(R.color.alert_white)) // nur wenn kein customView
-				.setDialogTitel("Custom Center") // nur wenn kein customView
-				.setDialogMessage("Message<br><b>Auto Close in 4 sec</b> Test") // nur wenn kein customView
+				//.setDialogTextColor(getResources().getColor(R.color.alert_white)) // nur wenn kein customView
+				//.setDialogTitel("Custom Center") // nur wenn kein customView
+				//.setDialogMessage("Message<br><b>white VextView</b> Test") // nur wenn kein customView
                 
                 .setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
-				.setHeaderIconEnable(true)
+				.setHeaderIconEnable(false)
 				.setHeaderIconAnimate(false)
 
                 .setButtonRadius(80)
                 .setButtonTextSize(15)
 				.setButtonStrokeSize(3)
-				.setPositiveButtonText("IMMER WIEDER")
+				.setPositiveButtonText("Get Text")
 				.setPositiveButtonColor(getResources().getColor(R.color.alert_white))
 				//.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
-				.setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_red))
-				.setNegativeButtonText("Niemals")
+				.setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_green))
+				.setNegativeButtonText("CANCEL")
 				.setNegativeButtonColor(getResources().getColor(R.color.alert_white))
                 .setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
-				.setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))
-                /*
+				.setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_red))
+
                 .addPositiveButtonListener(new AlerterDialog.PositiveButtonListener() {
                     @Override
                     public void onClick() {
-                        Toast.makeText(MainActivity.this, "Positive", Toast.LENGTH_SHORT).show();
-                        alerterDialog.startAnimHeaderIcon(true);
+                        Toast.makeText(MainActivity.this, txtEdit.getText().toString(), Toast.LENGTH_SHORT).show();
+                        //alerterDialog.startAnimHeaderIcon(true);
                     }
                 })
                 .addNegativeButtonListener(new AlerterDialog.NegativeButtonListener() {
                     @Override
                     public void onClick() {
                         Toast.makeText(MainActivity.this, "Negative", Toast.LENGTH_SHORT).show();
-                        alerterDialog.startAnimHeaderIcon(false);
+                        //alerterDialog.startAnimHeaderIcon(false);
                         alerterDialog.dismissAlert();
                     }
                 })
-                */
+
         ;
         alerterDialog.show(getSupportFragmentManager(), "");
     }
@@ -333,12 +331,12 @@ public class MainActivity extends AppCompatActivity {
                 .setDialogAnimation(false)
                 .setDialogRadius(40)
                 .setDialogClickDismiss(true)
-                .setDialogCloseDuration(0)
+                .setDialogCloseDuration(4000)
                 //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
                 .setDialogBackgroundColor(getResources().getColor(R.color.alert_green))
                 .setDialogTextColor(getResources().getColor(R.color.alert_red)) // nur wenn kein customView
                 .setDialogTitel("Titel 2") // nur wenn kein customView
-                .setDialogMessage("Message2<br><b>Testmessage</b> Test") // nur wenn kein customView
+                .setDialogMessage("Message<br><b>Auto Close in 4 sec</b> Test") // nur wenn kein customView
 
                 //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
                 .setHeaderIconEnable(true)
@@ -355,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButtonColor(getResources().getColor(R.color.alert_white))
                 //.setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
                 .setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))
+                /*
                 .addPositiveButtonListener(new AlerterDialog.PositiveButtonListener() {
                     @Override
                     public void onClick() {
@@ -362,6 +361,8 @@ public class MainActivity extends AppCompatActivity {
                         alerterDialog.startAnimHeaderIcon(true);
                     }
                 })
+
+                 */
         ;
         alerterDialog.show(getSupportFragmentManager(), "");
     }

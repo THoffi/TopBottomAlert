@@ -322,7 +322,7 @@
                     android:layout_margin="5dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/colorError"
-                    android:text="Bottom"
+                    android:text="Bottom\n Animateted"
                     android:textColor="#ffffff"
                     tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -336,7 +336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/colorPrimaryDark"
-                    android:text="Center-Custom\nAutoClose"
+                    android:text="Center-Custom"
                     android:textColor="#ffffff"
                     tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -350,7 +350,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/colorPrimaryDark"
-                    android:text="Top"
+                    android:text="Top\nauto-Close"
                     android:textColor="#ffffff"
                     tools:ignore="ButtonStyle,HardcodedText" />
 

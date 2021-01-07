@@ -44,6 +44,7 @@ public class Alerter {
     private View rootView;
     private  boolean focusable;
     private PopupWindow popupWindow;
+    private ImageView imgClose;
 
     public static int TOP = Gravity.TOP;
     public static int BOTTOM = Gravity.BOTTOM;
@@ -92,7 +93,7 @@ public class Alerter {
     public Alerter(final Context context) {
         this.activity = (Activity) context;
         //this.rootView = view;
-		this.rootView = activity.findViewById(android.R.id.content); // NEU ???
+		this.rootView = activity.findViewById(android.R.id.content);
 		/* wenn das geht, kann "rootview" in MainActivity
 		** und "View view" hier weg!!
 		*/
@@ -318,7 +319,15 @@ public class Alerter {
             rlClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    dismissAlerter();
+                    rlClose.setVisibility(View.INVISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissAlerter();
+                        }
+                    }, 10);
+
+                    //dismissAlerter();
                 }
             });
         }
@@ -333,6 +342,7 @@ public class Alerter {
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
             popupView = inflater.inflate(layout, null);
             rlClose = popupView.findViewById(R.id.rlClose);
+            imgClose = popupView.findViewById(R.id.imgClose);
         }
     }
 

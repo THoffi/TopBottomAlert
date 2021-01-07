@@ -11,8 +11,8 @@
     </style>
 
     <style name="DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/alerter_pulse</item>
-        <item name="android:windowExitAnimation">@anim/alerter_rotate</item>
+        <item name="android:windowEnterAnimation">@anim/alerter_scale_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alerter_scale_alpha_out</item>
     </style>
 
 </resources>
