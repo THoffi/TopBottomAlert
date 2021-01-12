@@ -7,6 +7,8 @@ import android.annotation.SuppressLint;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -221,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
 				.setDialogTitel("Buttom Dialog") // nur wenn kein customView
 				.setDialogMessage("Message<br><b>Buttom Dialog</b>") // nur wenn kein customView
                 
-                //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
-                //.setHeaderFontAwesomeIcon(de.th.topbottomalerter.R.string.fa_question_circle)
+                //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher)) // muss gleichseitig sein!
+                .setHeaderFontAwesomeIcon(de.th.topbottomalerter.R.string.fas_bell, 0.45F) // letterSpacing bei gleichseitigen Icon ca. 0.2F, bei rechteckigem Icon 0.5F bis 0.9F
                 .setHeaderFontAwesomeIconColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess))
 				.setHeaderIconEnable(true)
 				.setHeaderIconAnimate(true)
@@ -281,17 +283,19 @@ public class MainActivity extends AppCompatActivity {
 				//.setDialogTitel("Custom Center") // nur wenn kein customView
 				//.setDialogMessage("Message<br><b>white VextView</b> Test") // nur wenn kein customView
                 
-                .setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
+                .setHeaderDrawableIcon(getResources().getDrawable(R.drawable.ic_baseline_error_48)) // muss gleichseitig sein!
+                //.setHeaderFontAwesomeIcon(de.th.topbottomalerter.R.string.fas_baby, 0.5F) // letterSpacing bei gleichseitigen Icon 0.2F, bei rechteckigem Icon 0.5F
+                //.setHeaderFontAwesomeIconColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess))
 				.setHeaderIconEnable(false)
 				.setHeaderIconAnimate(false)
 
                 .setButtonRadius(80)
-                .setButtonTextSize(15)
-				.setButtonStrokeSize(3)
+                .setButtonTextSize(16)
+				.setButtonStrokeSize(2)
 				.setPositiveButtonText("Get Text")
 				.setPositiveButtonColor(getResources().getColor(R.color.alert_white))
-				//.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
-				.setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_green))
+				.setPositiveButtonTextColor(getResources().getColor(R.color.colorInfo))
+				.setPositiveButtonStrokeColor(getResources().getColor(R.color.colorInfo))
 				.setNegativeButtonText("CANCEL")
 				.setNegativeButtonColor(getResources().getColor(R.color.alert_white))
                 .setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
@@ -320,10 +324,6 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("UseCompatLoadingForDrawables")
     private void callAlerterDialogTop(){
 
-        // Nur für customView!
-        //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //@SuppressLint("InflateParams") View customView = inflater.inflate(R.layout.standard_alertdialog_layout, null, false);
-
         alerterDialog = new AlerterDialog(context)
                 .setDialogPosition(AlerterDialog.Position.TOP)
                 //.setDialogCustomView(customView)
@@ -333,23 +333,25 @@ public class MainActivity extends AppCompatActivity {
                 .setDialogClickDismiss(true)
                 .setDialogCloseDuration(4000)
                 //.setDialogTypeFace(Typeface.createFromAsset(getAssets(), "bsans.ttf"))
-                .setDialogBackgroundColor(getResources().getColor(R.color.alert_green))
-                .setDialogTextColor(getResources().getColor(R.color.alert_red)) // nur wenn kein customView
-                .setDialogTitel("Titel 2") // nur wenn kein customView
+                .setDialogBackgroundColor(getResources().getColor(R.color.colorWarning))
+                .setDialogTextColor(getResources().getColor(R.color.alert_white)) // nur wenn kein customView
+                .setDialogTitel("Warning!") // nur wenn kein customView
                 .setDialogMessage("Message<br><b>Auto Close in 4 sec</b> Test") // nur wenn kein customView
 
-                //.setHeaderDrawableIcon(getResources().getDrawable(R.drawable.luncher))
+                .setHeaderDrawableIcon(getResources().getDrawable(R.drawable.ic_baseline_error_48)) // muss gleichseitig sein!
+                //.setHeaderFontAwesomeIcon(de.th.topbottomalerter.R.string.fas_baby, 0.5F) // letterSpacing bei gleichseitigen Icon 0.2F, bei rechteckigem Icon 0.5F
+                //.setHeaderFontAwesomeIconColor(ContextCompat.getColor(getApplicationContext(),R.color.colorSuccess))
                 .setHeaderIconEnable(true)
                 .setHeaderIconAnimate(false)
 
                 .setButtonRadius(80)
                 .setButtonTextSize(15)
                 .setButtonStrokeSize(3)
-                .setPositiveButtonText("IMMER WIEDER")
+                .setPositiveButtonText("YES")
                 .setPositiveButtonColor(getResources().getColor(R.color.alert_white))
                 //.setPositiveButtonTextColor(getResources().getColor(R.color.alert_green))
                 .setPositiveButtonStrokeColor(getResources().getColor(R.color.alert_green))
-                .setNegativeButtonText("Niemals")
+                .setNegativeButtonText("NEVER")
                 .setNegativeButtonColor(getResources().getColor(R.color.alert_white))
                 //.setNegativeButtonTextColor(getResources().getColor(R.color.alert_red))
                 .setNegativeButtonStrokeColor(getResources().getColor(R.color.alert_green))

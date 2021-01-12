@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -29,15 +28,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 
@@ -61,14 +56,16 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     private Context context;
     private Activity activity;
     
-    private View rootView, dialogView, iconView, buttonRootView, customView;
+    private View rootView;
+    private View dialogView;
+    private View buttonRootView;
+    private View customView;
     private TextView txtNegativeButton, txtPositiveButton;
     private FrameLayout frameLayoutContent;
     private CircularImageView circularImageView;
 	private Typeface typeFace;
 	private Drawable iconDrawable = null;
-	private de.th.fontawesome.FontAwesomeDrawable iconFADrawable = null;
-	
+
     private PositiveButtonListener positiveButtonListener;
     private NegativeButtonListener negativeButtonListener;
 	
@@ -105,6 +102,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 	private int closeDuration = 0;					// Wartezeit bis Dialog automatisch geschlossen wird [ms], 0 = wird niemals autom. geschlossen
 	static int dismissDelay = 150;					// Wartezeit wenn Dialog geschlossen wird [ms]
     private float buttonTextSize = 16;				// TextSize für Positive und Negative Button
+    private float letterSpacing = 0;				// Spacing für FontAwesomeIcon (0F bis 1F)
 	
 	private android.os.Handler handlerAutoClose = null;
 	private Runnable runnableAutoCloser = null;
@@ -214,9 +212,9 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
             }
         } else if (i == R.id.alert_icon){
 			// + Click HeaderIcon
-            if (!animHeaderIconEnable){
+            //if (!animHeaderIconEnable){
                 circularImageView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.alerter_rotate));
-            }
+            //}
         }
     }
 	
@@ -235,7 +233,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
         frameLayoutContent = dialogView.findViewById(R.id.frameLayoutContent);
         circularImageView = dialogView.findViewById(R.id.alert_icon);
         circularImageView.setOnClickListener(this);
-        iconView = dialogView.findViewById(R.id.frameIcon);
+        View iconView = dialogView.findViewById(R.id.frameIcon);
         buttonRootView = dialogView.findViewById(R.id.button_root);
 
         if(textColor == 0) {
@@ -324,24 +322,19 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
      * Set drawable Header Icon
      * **/
     private void actionSetHeaderIcon() {
-		if (iconDrawable != null) {
+        FontAweDrawable iconFADrawable;
+        if (iconDrawable != null) {
             // + set Custom Icon with Drawable
             circularImageView.setImageDrawable(iconDrawable);
         }else if(iconFontAwesome != 0){
-			// + set Custom Icon with FontAwesomeDrawable
-            iconFADrawable = new de.th.fontawesome.FontAwesomeDrawable(activity, iconFontAwesome); // optimal nur Circle
-            if(iconFontAwesomeColor != 0){
-                iconFADrawable.setTextColor(iconFontAwesomeColor);
-            }else{
-                iconFADrawable.setTextColor(getResources().getColor(R.color.alert_green));
-            }
-            iconFADrawable.setTextSize(68);
+			// + set Custom Icon with FontAweDrawable
+            // letterSpacing bei quadratischem Icon 0.2F, bei rechteckigem Icon 0.5F
+            iconFADrawable = new FontAweDrawable(context, getResources(), iconFontAwesome, letterSpacing, iconFontAwesomeColor);
             circularImageView.setImageDrawable(iconFADrawable);
 		}else{
 			// + set Standard Icon with FontAwesomeDrawable
-            iconFADrawable = new de.th.fontawesome.FontAwesomeDrawable(activity, R.string.fas_info_circle); // optimal nur Circle
-            iconFADrawable.setTextColor(getResources().getColor(R.color.alert_green));
-            iconFADrawable.setTextSize(68);
+            // letterSpacing bei quadratischem Icon 0.2F, bei rechteckigem Icon 0.5F
+            iconFADrawable = new FontAweDrawable(context, getResources(), R.string.fas_info_circle, 0.2F, getResources().getColor(R.color.alert_green));
             circularImageView.setImageDrawable(iconFADrawable);
 		}
     }
@@ -478,7 +471,8 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 
     public void dismissAlert() {
 		// NEU mit Verzögerung
-		if(dismissDelay > 0){
+        if(animDialog) dismissDelay = 50;
+		if(dismissDelay > 0) {
 			android.os.Handler handler = new android.os.Handler();
 			handler.postDelayed(new Runnable() {
 				@Override
@@ -497,7 +491,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
             circularImageView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),R.drawable.ic_cycle,context.getTheme()));
             circularImageView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.alerter_rotate_indefinitely));
         }else {
-            circularImageView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),R.drawable.luncher,context.getTheme()));
+            circularImageView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),R.drawable.ic_cycle,context.getTheme()));
             circularImageView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.alerter_rotate));
         }
 
@@ -559,8 +553,9 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
         this.iconDrawable = iconDrawable;
         return this;
     }
-    public AlerterDialog setHeaderFontAwesomeIcon(int iconFontAwesome) {
+    public AlerterDialog setHeaderFontAwesomeIcon(int iconFontAwesome, float letterSpacing) {
         this.iconFontAwesome = iconFontAwesome;
+        this.letterSpacing = letterSpacing;
         return this;
     }
     public AlerterDialog setHeaderFontAwesomeIconColor(int iconFontAwesomeColor) {

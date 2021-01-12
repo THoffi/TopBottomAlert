@@ -34,7 +34,7 @@
 		<!-- Dialog Button Placeholder -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="12dp"
             android:visibility="gone"
             android:id="@+id/button_root_placeholder"
             android:layout_below="@+id/frameLayout3">
@@ -44,7 +44,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"

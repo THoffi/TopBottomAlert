@@ -319,13 +319,14 @@ public class Alerter {
             rlClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    rlClose.setVisibility(View.INVISIBLE);
+                    //rlClose.setVisibility(View.INVISIBLE);
+                    rlClose.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.alerter_alpha_out));
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             dismissAlerter();
                         }
-                    }, 10);
+                    }, 100);
 
                     //dismissAlerter();
                 }

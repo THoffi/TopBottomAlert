@@ -5,16 +5,16 @@
      android:fillEnabled="true">
 
     <alpha
-        android:duration="900"
+        android:duration="800"
         android:fromAlpha="0.0"
         android:startOffset="0"
         android:toAlpha="1.0"/>
 
     <scale
-        android:duration="900"
+        android:duration="800"
         android:fromXScale="0.0"
         android:fromYScale="0.0"
-        android:pivotX="50%"
+        android:pivotX="60%"
         android:pivotY="50%"
         android:toXScale="1.0"
         android:toYScale="1.0"/>
