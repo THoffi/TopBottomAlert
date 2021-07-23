@@ -7,8 +7,8 @@ import android.annotation.SuppressLint;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.InsetDrawable;
+//import android.graphics.drawable.Drawable;
+//import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         alerterDialog = new AlerterDialog(context)
                 .setDialogPosition(AlerterDialog.Position.TOP)
                 //.setDialogCustomView(customView)
-                .setDialogCancelable(true)
+                .setDialogCancelable(false)
                 .setDialogAnimation(false)
                 .setDialogRadius(40)
                 .setDialogClickDismiss(true)

@@ -18,7 +18,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.util.DisplayMetrics;
-import android.util.Log;
+//import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,8 +53,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 @SuppressLint("ValidFragment")
 public class AlerterDialog extends DialogFragment implements View.OnClickListener {
 	
-    private Context context;
-    private Activity activity;
+    private final Context context;
+    private final Activity activity;
     
     private View rootView;
     private View dialogView;
@@ -82,7 +82,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     private String negativeButtonText = null;
 	private String titleText = null;
     private String messageText = null;
-	private final String TAG = "AlerterDialog";
+	//private final String TAG = "AlerterDialog";
 	
 	private int iconFontAwesome = 0;				// z.B. R.string.fa_check_circle
     private int iconFontAwesomeColor = 0;			// z.B. getResources().getColor(R.color.alert_green)
@@ -129,10 +129,11 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(dialogView == null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialogView = inflater.inflate(R.layout.dialogview_alertdialog_layout, container, false);
         }
 
-		Log.e(TAG, "View onCreateView()");
+		//Log.e(TAG, "View onCreateView()");
         return dialogView;
     }
 
@@ -150,7 +151,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
         initRootView();
 		// Set Dialog
         if(getDialog() == null || getDialog().getWindow() == null) return;
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE); // ERROR
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         if(animDialog) getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         // Set Dialog Canceable
@@ -175,7 +176,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 		// Set AutoClose
 		actionSetAutoClose();
 
-        Log.e(TAG, "onViewCreated()");
+        //Log.e(TAG, "onViewCreated()");
     }
 
     @Override
@@ -267,7 +268,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
             circularImageView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.alerter_rotate));
         }
 
-        Log.e(TAG, "initRootView()");
+        //Log.e(TAG, "initRootView()");
     }
 
     /**
