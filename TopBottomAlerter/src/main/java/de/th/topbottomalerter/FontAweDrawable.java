@@ -13,7 +13,7 @@ import android.os.Build;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.util.Log;
+//import android.util.Log;
 import android.util.TypedValue;
 
 import androidx.core.content.res.ResourcesCompat;

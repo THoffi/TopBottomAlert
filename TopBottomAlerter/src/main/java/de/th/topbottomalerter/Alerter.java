@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -30,7 +31,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 	based on https://github.com/shasin89/NotificationBanner
  */
  
- /* todo
+ /*
 // https://github.com/Tapadoo/Alerter
 // https://github.com/Hamadakram/Sneaker
 // https://github.com/salehyarahmadi/AndExAlertDialog
@@ -44,7 +45,6 @@ public class Alerter {
     private View rootView;
     private  boolean focusable;
     private PopupWindow popupWindow;
-    private ImageView imgClose;
 
     public static int TOP = Gravity.TOP;
     public static int BOTTOM = Gravity.BOTTOM;
@@ -69,7 +69,7 @@ public class Alerter {
 
     //private int layout;
 
-    private String TAG = getClass().getName();
+    private final String TAG = getClass().getName();
 
     @SuppressLint("StaticFieldLeak")
     private static Alerter instance;
@@ -78,7 +78,7 @@ public class Alerter {
     private static Handler handler = null;
     private static Runnable runnable = null;
 
-	// todo ???????????
+
     /*
     public interface AlerterListener {
         void onViewClickListener(View view);
@@ -146,7 +146,7 @@ public class Alerter {
     /**
      * this constructor is used for customlayout
      */
-    public static Alerter make(Context context, int position, int Customlayout) {
+    public static void make(Context context, int position, int Customlayout) {
 
         checkInstance();
 		instance.activity = (Activity) context;
@@ -156,7 +156,6 @@ public class Alerter {
         instance.setDuration(0);
         instance.setGravity(position);
         instance.setAnimationstyle();
-        return instance;
     }
 	// +++ Constructors End +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -321,7 +320,7 @@ public class Alerter {
                 public void onClick(View view) {
                     //rlClose.setVisibility(View.INVISIBLE);
                     rlClose.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.alerter_alpha_out));
-                    new Handler().postDelayed(new Runnable() {
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             dismissAlerter();
@@ -343,7 +342,7 @@ public class Alerter {
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
             popupView = inflater.inflate(layout, null);
             rlClose = popupView.findViewById(R.id.rlClose);
-            imgClose = popupView.findViewById(R.id.imgClose);
+            ImageView imgClose = popupView.findViewById(R.id.imgClose);
         }
     }
 
@@ -397,7 +396,7 @@ public class Alerter {
 			}
 
 			// Show PopupWindow
-			android.os.Handler handler = new android.os.Handler();
+			android.os.Handler handler = new android.os.Handler(Looper.getMainLooper());
 			handler.postDelayed(new Runnable() {
 			    @Override
                 public void run() {
@@ -428,7 +427,7 @@ public class Alerter {
      */
     private void autoDismiss(int duration){
         if(duration > 0){
-            handler = new android.os.Handler();
+            handler = new android.os.Handler(Looper.getMainLooper());
             runnable = new Runnable() {
                 public void run() {
                     // do something

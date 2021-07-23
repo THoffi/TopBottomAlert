@@ -14,6 +14,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -307,7 +308,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
     private void actionSetAutoClose() {
 		if(closeDuration > 0 && !isNegativeListener && !isPositiveListener){
 			// nur wenn KEINE Button
-			handlerAutoClose = new android.os.Handler();
+			handlerAutoClose = new android.os.Handler(Looper.getMainLooper());
 			runnableAutoCloser = (new Runnable() {
 				@Override
 				public void run() {
@@ -474,7 +475,7 @@ public class AlerterDialog extends DialogFragment implements View.OnClickListene
 		// NEU mit Verzögerung
         if(animDialog) dismissDelay = 50;
 		if(dismissDelay > 0) {
-			android.os.Handler handler = new android.os.Handler();
+			android.os.Handler handler = new android.os.Handler(Looper.getMainLooper());
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
